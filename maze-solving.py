@@ -1,21 +1,26 @@
 from turtle import Turtle, setup, done
 from time import sleep
+from sys import argv
+from random import randrange
 
-grid = [[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-				[1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 1, 1],
-        [1, 1, 1, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1],
-        [1, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 2, 1],
-        [1, 0, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1],
-        [1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1],
-        [1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1],
-				[1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1],
-				[1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0, 1, 0, 1],
-				[1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 1, 0, 1],
-				[1, 0, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1],
-				[1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1],
-				[1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1],
-				[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1],
-				[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]]
+#grid = [[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+#				[1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 1, 1],
+#				[1, 1, 1, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1],
+#       [1, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 2, 1],
+#				[1, 0, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1],
+#       [1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1],
+#       [1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1],
+#				[1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1],
+#				[1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0, 1, 0, 1],
+#				[1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 1, 0, 1],
+#				[1, 0, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1],
+#				[1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1],
+#				[1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1],
+#				[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1],
+#				[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]]
+
+grid = []
+indx, obj = (argv[1], argv[1])
 
 arrow = Turtle()
 setup(width=600, height=600, startx=0, starty=0)
@@ -24,7 +29,7 @@ def search(x, y):
 	arrow.color('green')
 	arrow.shape('turtle')
 	arrow.resizemode('user')
-	arrow.shapesize(0.45, 0.45)
+	arrow.shapesize(0.35, 0.35)
 	arrow.penup()
 
 	if grid[x][y] == 2:
@@ -59,25 +64,40 @@ def setup(x, y):
 	for width, width_obj in enumerate(grid[x]):
 		print ('width: '+str(width))
 		arrow.setx(width*8)
+		arrow.penup()
 		for height, height_obj in enumerate(grid[y]):
 				print ('height: '+str(height))
 				arrow.sety(height*8)
 				if height_obj == 1:
 					arrow.pendown()
-					arrow.circle(3.5)
-					arrow.penup()
+					arrow.circle(1)
+					#arrow.penup()
 				elif height_obj == 2:
 					arrow.pendown()
 					arrow.color('red')
-					arrow.circle(3.5)
+					arrow.circle(1)
 					arrow.color('black')
+					#arrow.penup()
+				else:
 					arrow.penup()
 				#sleep(0.2)
 		y+=1
 
+def random(indx, obj):
+	for x in range(int(indx)):
+		add = []
+		for y in range(int(obj)):
+#			height = randrange(3)
+#			if y > 0 and random(x, y-1)
+			add.append(1)
+		grid.append(add)
+
+	print (grid)
+
+random(indx, obj)
 setup(0, 0)
 arrow.penup()
 arrow.setx(0)
 arrow.sety(0)
 arrow.pendown()
-search(1, 1)
+#search(1, 1)
