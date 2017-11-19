@@ -84,18 +84,22 @@ def setup(x, y):
 		y+=1
 
 def random(indx, obj):
-	for x in range(int(indx)):
-		add = []
-		for y in range(int(obj)):
-#			height = randrange(3)
-#			if y > 0 and random(x, y-1)
-			add.append(1)
-		grid.append(add)
+  add = []
+  for x in range(indx):
+    for y in range(obj):
+      add.append(randrange(0, 1))
+  for i, o in enumerate(add):
+    up = i-1
+    down = i+1
+    try:
+      if i
+    for 0 in o:
+      add[][o]
+  grid.append(add)
+  print (grid)
 
-	print (grid)
-
-random(indx, obj)
-setup(0, 0)
+random(int(indx), int(obj))
+#setup(0, 0)
 arrow.penup()
 arrow.setx(0)
 arrow.sety(0)
