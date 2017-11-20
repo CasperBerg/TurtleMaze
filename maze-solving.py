@@ -1,4 +1,4 @@
-from turtle import Turtle, setup, done
+from turtle import Turtle, setup, done, delay, tracer, screensize
 from time import sleep
 from sys import argv
 from random import randrange
@@ -20,17 +20,18 @@ from random import randrange
 #				[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]]
 
 grid = []
-indx, obj = (argv[1], argv[1])
+value = (argv[1])
 
 arrow = Turtle()
-setup(width=600, height=600, startx=0, starty=0)
+setup(width=600, height=600, startx=None, starty=None)
+delay(0)
 
 def search(x, y):
 	arrow.color('green')
 	arrow.shape('turtle')
 	arrow.resizemode('user')
 	arrow.shapesize(0.35, 0.35)
-	arrow.penup()
+	#arrow.penup()
 
 	if grid[x][y] == 2:
 		print ('found at %d,%d' % (x, y))
@@ -43,7 +44,7 @@ def search(x, y):
 		print ('visited at %d,%d' % (x, y))
 		return False
 
-	sleep(0.5)
+	#sleep(0.5)
 	arrow.setx(x*8)
 	arrow.sety(y*8)
 	print ('visiting %d,%d' % (x, y))
@@ -59,49 +60,61 @@ def search(x, y):
 	return False
 
 def setup(x, y):
-	arrow.penup()
-	arrow.speed('fastest')
-	for width, width_obj in enumerate(grid[x]):
-		print ('width: '+str(width))
-		arrow.setx(width*8)
-		arrow.penup()
-		for height, height_obj in enumerate(grid[y]):
-				print ('height: '+str(height))
-				arrow.sety(height*8)
-				if height_obj == 1:
-					arrow.pendown()
-					arrow.circle(1)
-					#arrow.penup()
-				elif height_obj == 2:
-					arrow.pendown()
-					arrow.color('red')
-					arrow.circle(1)
-					arrow.color('black')
-					#arrow.penup()
-				else:
-					arrow.penup()
-				#sleep(0.2)
-		y+=1
+  arrow.penup()
+  arrow.speed('fastest')
+  for width, width_obj in enumerate(grid[x]):
+    print ('width: '+str(width))
+    arrow.setx(width*8)
+    arrow.penup()
+    for height, height_obj in enumerate(grid[y]):
+      print ('height: '+str(height))
+      arrow.sety(height*8)
+      if height_obj == 1:
+        arrow.pendown()
+        #arrow.circle(1)
+        arrow.dot()
+        arrow.penup()
+      elif height_obj == 2:
+        arrow.pendown()
+        arrow.color('red')
+        #arrow.circle(1)
+        arrow.dot()
+        arrow.color('black')
+        arrow.penup()
+      else:
+        arrow.penup()
+        #sleep(0.2)
+    y+=1
 
-def random(indx, obj):
-  add = []
-  for x in range(indx):
-    for y in range(obj):
-      add.append(randrange(0, 1))
-  for i, o in enumerate(add):
-    up = i-1
-    down = i+1
-    try:
-      if i
-    for 0 in o:
-      add[][o]
-  grid.append(add)
+def random(value):
+  for x in range(value):
+    add = []
+    for y in range(value):
+      print('x: '+str(x))
+      print('y: '+str(y))
+      if x == 0 or x == value-1 or y == 0 or y == value-1:
+        add.append(1)
+      elif x == 1 and y == 1:
+        add.append(0)
+      elif x == value-2 and y == value-2:
+        add.append(2)
+      else:
+        try:
+          if grid[y][y] == 0:
+            add.append(0)
+          else:
+            add.append(randrange(0, 2))
+        except:
+          add.append(randrange(0, 2))
+
+    grid.append(add)
+
   print (grid)
 
-random(int(indx), int(obj))
-#setup(0, 0)
+random(int(value))
+setup(0, 0)
 arrow.penup()
 arrow.setx(0)
 arrow.sety(0)
 arrow.pendown()
-#search(1, 1)
+search(1, 1)
