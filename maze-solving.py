@@ -21,9 +21,10 @@ from random import randrange
 
 grid = []
 value = (argv[1])
+solv = False
 
 arrow = Turtle()
-setup(width=600, height=600, startx=None, starty=None)
+setup(width=600, height=600, startx=600, starty=None)
 delay(0)
 
 def search(x, y):
@@ -111,7 +112,43 @@ def random(value):
 
   print (grid)
 
-random(int(value))
+while True:
+  random(int(value))
+  def check(x,y):
+    global solv
+    if grid[x][y] == 2:
+      print ('found at %d,%d' % (x, y))
+      solv = True
+      print (grid)
+      for index, obj in enumerate(grid):
+        i = -1
+        for x in obj:
+          print(str(x)+'x')
+          if x == 3:
+            grid[index][i] = 0
+            print('g'+str(grid[index][i]))
+          i+=1
+        #grid[index][x] = 0
+      return True
+    elif grid[x][y] == 1:
+      print ('wall at %d,%d' % (x, y))
+      return False
+    elif grid[x][y] == 3:
+      print ('visited at %d,%d' % (x, y))
+      return False
+
+    grid[x][y]=3
+    if x < len(grid)-1 and check(x+1, y) \
+    or y > 0 and check(x, y-1) \
+    or x > 0 and check(x-1, y) \
+    or y < len(grid)-1 and check(x, y+1):
+      solv = True
+      return True
+    return False
+  check(1,1)
+  if not solv == True:grid = []
+  else:break
+
 setup(0, 0)
 arrow.penup()
 arrow.setx(0)
