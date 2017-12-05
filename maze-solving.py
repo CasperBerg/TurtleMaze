@@ -1,6 +1,6 @@
 from turtle import Turtle, setup, done, delay, tracer, screensize
 from time import sleep
-from sys import argv
+from sys import argv, setrecursionlimit
 from random import randrange
 
 #grid = [[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -24,8 +24,11 @@ value = (argv[1])
 solv = False
 
 arrow = Turtle()
+screensize(int(argv[1])*18, int(argv[1])*18)
 setup(width=600, height=600, startx=600, starty=None)
 delay(0)
+
+setrecursionlimit(4000)
 
 def search(x, y):
 	arrow.color('green')
@@ -52,10 +55,10 @@ def search(x, y):
 
 	grid[x][y] = 3
 
-	if x < len(grid)-1 and search(x+1, y) \
-		or y > 0 and search(x, y-1) \
-		or x > 0 and search(x-1, y) \
-		or y < len(grid)-1 and search(x, y+1):
+	if x < len(grid)+1 and search(x-1, y) \
+		or y > 0 and search(x, y+1) \
+		or x > 0 and search(x+1, y) \
+		or y < len(grid)+1 and search(x, y-1):
 			return True
 
 	return False
@@ -102,7 +105,10 @@ def random(value):
       else:
         try:
           if grid[y][y] == 0:
-            add.append(0)
+            r = randrange(0,2)
+            if r == 0:
+              add.append(0)
+            else: add.append(randrange(0, 2))
           else:
             add.append(randrange(0, 2))
         except:
@@ -121,7 +127,7 @@ while True:
       solv = True
       print (grid)
       for index, obj in enumerate(grid):
-        i = -1
+        i = 0
         for x in obj:
           print(str(x)+'x')
           if x == 3:
@@ -148,6 +154,8 @@ while True:
   check(1,1)
   if not solv == True:grid = []
   else:break
+
+print (grid)
 
 setup(0, 0)
 arrow.penup()
